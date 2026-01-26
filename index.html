@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="uk" id="htmlLang">
 <head>
-
+	
 	<!-- Plausible Analytics -->
     <script defer data-domain="svetonoscy.online" src="https://plausible.io/js/script.js"></script>
 
@@ -10,10 +10,13 @@
     <meta name="description" content="Енергоінформаційний гіпноз — практика для очищення негативних впливів, відновлення енергетичного балансу та пошуку життєвої ясності. Професійна робота у парі. Дистанційно.">
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Енергоінформаційний гіпноз | Світлоносці">
-    <meta property="og:description" content="Практика для очищення впливів, відновлення енергетичного балансу та внесення ясності у життєві процеси.">
-    <meta property="og:url" content="https://svetonoscy.online/">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Енергоінформаційний гіпноз | Світлоносці">
+	<meta property="og:description" content="Практика очищення впливів, відновлення енергетичного балансу та внутрішньої ясності. Дистанційна робота у парі.">
+	<meta property="og:image" content="https://svetonoscy.online/images/og-cosmic-light.jpg">
+	<meta property="og:url" content="https://svetonoscy.online/">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
 	
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +30,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <style>
         :root {
             --bg-main: #F4EFE7;
@@ -189,7 +196,7 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
-			object-position: center top; /* центрує фото зверху */
+			object-position: center top;
 			display: block;
 		}
         
@@ -335,12 +342,20 @@
             justify-content: center;
             flex-direction: column;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
         }
         
         .person-photo i {
             font-size: 3rem;
             color: var(--decorative);
             margin-bottom: 1rem;
+        }
+        
+        .person-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
         
         .person-name {
@@ -400,16 +415,83 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             background-color: white;
+            transition: all 0.3s ease;
         }
         
         .form-control:focus {
             outline: none;
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(78, 107, 74, 0.1);
         }
         
         textarea.form-control {
             min-height: 150px;
             resize: vertical;
+        }
+        
+        /* Стилі для повідомлень та індикатора завантаження */
+        .status-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideIn 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .status-message.success {
+            background-color: rgba(78, 107, 74, 0.15);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .status-message.error {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: #dc3545;
+            border: 2px solid #dc3545;
+        }
+
+        .btn.loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn.loading .btn-text {
+            opacity: 0;
+        }
+
+        .btn-spinner {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .btn.loading .btn-spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
         /* БЛОК 9. ДИСКЛЕЙМЕР */
@@ -560,7 +642,7 @@
 
 		}
         
-        /* Анімації для плавного скролу */
+        /* Анімація для плавного скролу */
         html {
             scroll-behavior: smooth;
         }
@@ -598,17 +680,7 @@
             margin-right: 70px;
 			padding: 0.7rem 1rem;
             font-size: 1rem;
-			
         }
-		.nav-container {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 0 1.5rem 0 1.5rem; /* ЗМІНА: додано padding-right */
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			position: relative;
-}
     </style>
 </head>
 <body>
@@ -636,10 +708,10 @@
             </div>
             <div class="hero-images">
                 <div class="person-placeholder">
-                    <img src="images/maksym.jpg" alt="Максим" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                    <img src="images/maksym.jpg" alt="Максим">
                 </div>
                 <div class="person-placeholder">
-                    <img src="images/alla.jpg" alt="Алла" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                    <img src="images/alla.jpg" alt="Алла">
                 </div>
             </div>
         </div>
@@ -757,7 +829,7 @@
                 <h3 id="trainingSubtitle">Основи енергоінформаційного гіпнозу</h3>
                 <p id="trainingText1">Ми проводимо навчальні курси для тих, хто бажає освоїти методи роботи з енергоінформаційним полем для професійної діяльності або особистого розвитку.</p>
                 <p id="trainingText2">Програма навчання включає теоретичні основи, практичні техніки, етичні аспекти роботи, а також супервізію ваших перших сеансів. Навчання проходить у форматі індивідуальних або групових занять.</p>
-                <p id="trainingText3">Для детальнішої інформації про умови та вартість навчання звертайтесь до нас.</p>
+                <p id="trainingText3">Для детальнішої інформації про умови та вартість навчання звертайтеся до нас.</p>
             </div>
         </div>
     </section>
@@ -769,14 +841,14 @@
             <div class="about-content">
                 <div class="about-person">
                     <div class="person-photo">
-                        <img src="images/maksym2.png" alt="Максим" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                        <img src="images/maksym2.png" alt="Максим">
                     </div>
                     <div class="person-name">Максим</div>
                     <div class="person-role" id="maximRole">оператор · контактер</div>
                 </div>
                 <div class="about-person">
                     <div class="person-photo">
-                        <img src="images/alla2.jpg" alt="Алла" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                        <img src="images/alla2.jpg" alt="Алла">
                     </div>
                     <div class="person-name">Алла</div>
                     <div class="person-role" id="allaRole">контактер · оператор</div>
@@ -797,20 +869,26 @@
                     <p id="contactText4">Перша консультація (тривалістю 20-30 хвилин) проводиться безкоштовно для ознайомлення з методом та визначення можливостей роботи.</p>
                 </div>
                 <div class="contacts-form">
+                    <!-- Повідомлення про статус -->
+                    <div id="statusMessage" class="status-message"></div>
+                    
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="name" id="nameLabel">Ваше ім'я</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="email" id="emailLabel">Електронна пошта</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="message" id="messageLabel">Ваше повідомлення</label>
-                            <textarea id="message" class="form-control" required></textarea>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-block" id="contactBtn">Зв'язатися з нами</button>
+                        <button type="submit" class="btn btn-block" id="contactBtn">
+                            <span class="btn-text" id="contactBtnText">Зв'язатися з нами</span>
+                            <span class="btn-spinner"></span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -826,6 +904,126 @@
     </footer>
     
     <script>
+        // ======= EMAILJS КОНФІГУРАЦІЯ =======
+        // ВАЖЛИВО: Замініть YOUR_PUBLIC_KEY на ваш справжній ключ!
+        (function() {
+            emailjs.init("loZF-pPgxYrokhmAD"); // Отримайте тут: https://dashboard.emailjs.com/admin/account
+        })();
+
+        const EMAILJS_CONFIG = {
+            serviceID: 'service_fcat0gc',
+            templateID: 'template_9gl70w8'
+        };
+
+        // Тексти повідомлень для обох мов
+        const emailMessages = {
+            uk: {
+                sending: 'Відправляємо...',
+                success: '✓ Дякуємо! Ваше повідомлення успішно відправлено. Ми зв\'яжемося з вами найближчим часом.',
+                error: '✕ Виникла помилка при відправці. Будь ласка, спробуйте ще раз або напишіть на max.mylanych@gmail.com',
+                fillAll: '⚠ Будь ласка, заповніть всі поля',
+                invalidEmail: '⚠ Будь ласка, введіть коректний email'
+            },
+            ru: {
+                sending: 'Отправляем...',
+                success: '✓ Спасибо! Ваше сообщение успешно отправлено. Мы свяжемся с вами в ближайшее время.',
+                error: '✕ Возникла ошибка при отправке. Пожалуйста, попробуйте еще раз или напишите на max.mylanych@gmail.com',
+                fillAll: '⚠ Пожалуйста, заполните все поля',
+                invalidEmail: '⚠ Пожалуйста, введите корректный email'
+            }
+        };
+
+        // Функція показу повідомлення
+        function showStatusMessage(text, type) {
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.textContent = text;
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.style.display = 'block';
+            
+            // Плавний скрол до повідомлення
+            statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Автоматично приховати через 8 секунд
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 8000);
+        }
+
+        // Функція валідації email
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Обробка форми
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentLang = document.getElementById('htmlLang').getAttribute('lang');
+            const msg = emailMessages[currentLang];
+            
+            // Отримуємо значення полів
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Валідація
+            if (!name || !email || !message) {
+                showStatusMessage(msg.fillAll, 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showStatusMessage(msg.invalidEmail, 'error');
+                return;
+            }
+            
+            // Показуємо індикатор завантаження
+            const submitBtn = document.getElementById('contactBtn');
+            const btnText = document.getElementById('contactBtnText');
+            const originalText = btnText.textContent;
+            
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            btnText.textContent = msg.sending;
+            
+            // Параметри для EmailJS шаблону
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_email: 'max.mylanych@gmail.com'
+            };
+            
+            // Відправка через EmailJS
+            emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
+                .then(function(response) {
+                    console.log('✓ Email успішно відправлено:', response.status, response.text);
+                    showStatusMessage(msg.success, 'success');
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function(error) {
+                    console.error('✕ Помилка відправки:', error);
+                    showStatusMessage(msg.error, 'error');
+                })
+                .finally(function() {
+                    // Приховуємо індикатор завантаження
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                    btnText.textContent = originalText;
+                });
+        });
+
+        // Приховати повідомлення при введенні у форму
+        document.getElementById('contactForm').addEventListener('input', function() {
+            const statusMessage = document.getElementById('statusMessage');
+            if (statusMessage.style.display === 'block') {
+                statusMessage.style.display = 'none';
+            }
+        });
+
+        // ======= МОВНИЙ ПЕРЕМИКАЧ =======
+        
         // Тексти для української мови
         const translations = {
             uk: {
@@ -859,6 +1057,7 @@
                 ],
                 directionsList2: [
                     "Енергетичне очищення та балансування чакр",
+                    "Робота з інформаційними слідами зниклих людей (у дослідницькому форматі)",
                     "Контакт із інформаційними аспектами померлих",
                     "Допомога у визначенні життєвого призначення",
                     "Взаємодія з вищими аспектами (Вище Я, Наставники та ін.)",
@@ -875,7 +1074,7 @@
                 trainingSubtitle: "Основи енергоінформаційного гіпнозу",
                 trainingText1: "Ми проводимо навчальні курси для тих, хто бажає освоїти методи роботи з енергоінформаційним полем для професійної діяльності або особистого розвитку.",
                 trainingText2: "Програма навчання включає теоретичні основи, практичні техніки, етичні аспекти роботи, а також супервізію ваших перших сеансів. Навчання проходить у форматі індивідуальних або групових занять.",
-                trainingText3: "Для детальнішої інформації про умови та вартість навчання звертайтесь до нас.",
+                trainingText3: "Для детальнішої інформації про умови та вартість навчання звертайтеся до нас.",
                 aboutTitle: "Про нас",
                 maximRole: "оператор · контактер",
                 allaRole: "контактер · оператор",
@@ -887,7 +1086,7 @@
                 nameLabel: "Ваше ім'я",
                 emailLabel: "Електронна пошта",
                 messageLabel: "Ваше повідомлення",
-                contactBtn: "Зв'язатися з нами",
+                contactBtnText: "Зв'язатися з нами",
                 disclaimerText1: "Енергоінформаційний гіпноз не є медичною послугою та не замінює консультації лікаря чи психотерапевта. Результати роботи можуть відрізнятися в залежності від індивідуальних особливостей клієнта.",
                 disclaimerText2: "© 2026 Енергоінформаційний гіпноз. Світлоносці. Всі права захищені."
             },
@@ -922,6 +1121,7 @@
                 ],
                 directionsList2: [
                     "Энергетическое очищение и балансировка чакр",
+                    "Работа с информационными следами пропавших людей (в исследовательском формате)",
                     "Контакт с информационными аспектами умерших",
                     "Помощь в определении жизненного предназначения",
                     "Взаимодействие с высшими аспектами (Высшее Я, Наставники и др.)",
@@ -950,7 +1150,7 @@
                 nameLabel: "Ваше имя",
                 emailLabel: "Электронная почта",
                 messageLabel: "Ваше сообщение",
-                contactBtn: "Связаться с нами",
+                contactBtnText: "Связаться с нами",
                 disclaimerText1: "Энергоинформационный гипноз не является медицинской услугой и не заменяет консультации врача или психотерапевта. Результаты работы могут отличаться в зависимости от индивидуальных особенностей клиента.",
                 disclaimerText2: "© 2026 Энергоинформационный гипноз. Светоносцы. Все права защищены."
             }
@@ -959,11 +1159,9 @@
         // Функція для визначення мови за IP
         async function detectLanguageByIP() {
             try {
-                // Використовуємо безкоштовний сервіс для визначення країни за IP
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
                 
-                // Якщо країна Україна - українська мова, інакше - російська
                 if (data.country === 'UA') {
                     return 'uk';
                 } else {
@@ -971,52 +1169,42 @@
                 }
             } catch (error) {
                 console.error('Помилка визначення мови за IP:', error);
-                // Якщо не вдалося визначити, використовуємо українську за замовчуванням
                 return 'uk';
             }
         }
 
         // Функція для зміни мови
         function changeLanguage(lang) {
-            // Змінюємо атрибут lang у html
             document.getElementById('htmlLang').setAttribute('lang', lang);
             
-            // Оновлюємо всі тексти
             for (const key in translations[lang]) {
                 const element = document.getElementById(key);
                 if (element) {
                     if (key === 'directionsList1' || key === 'directionsList2') {
-                        // Для списків
                         const listItems = element.getElementsByTagName('li');
                         const items = translations[lang][key];
                         for (let i = 0; i < listItems.length && i < items.length; i++) {
                             listItems[i].textContent = items[i];
                         }
                     } else {
-                        // Для звичайних елементів
                         element.textContent = translations[lang][key];
                     }
                 }
             }
             
-            // Оновлюємо активну кнопку мови
             document.getElementById('langUa').classList.toggle('active', lang === 'uk');
             document.getElementById('langRu').classList.toggle('active', lang === 'ru');
             
-            // Зберігаємо вибір у localStorage
             localStorage.setItem('preferredLanguage', lang);
         }
 
         // Функція для завантаження обраної мови
         async function loadLanguage() {
-            // Спочатку перевіряємо, чи є збережена мова в localStorage
             const savedLang = localStorage.getItem('preferredLanguage');
             
             if (savedLang && (savedLang === 'uk' || savedLang === 'ru')) {
-                // Якщо є збережена мова, використовуємо її
                 changeLanguage(savedLang);
             } else {
-                // Якщо немає збереженої мови, визначаємо за IP
                 const detectedLang = await detectLanguageByIP();
                 changeLanguage(detectedLang);
             }
@@ -1026,7 +1214,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadLanguage();
             
-            // Додаємо обробники подій для кнопок мови
             document.getElementById('langUa').addEventListener('click', () => changeLanguage('uk'));
             document.getElementById('langRu').addEventListener('click', () => changeLanguage('ru'));
         });
@@ -1039,34 +1226,6 @@
             } else {
                 fixedNav.style.display = 'none';
             }
-        });
-        
-        // Обробка форми
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Отримуємо значення полів
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // В реальному застосунку тут буде відправка на сервер
-            // Зараз просто показуємо сповіщення
-            const currentLang = document.getElementById('htmlLang').getAttribute('lang');
-            if (currentLang === 'uk') {
-                alert(`Дякуємо, ${name}! Ваше повідомлення відправлено. Ми зв'яжемося з вами найближчим часом на email: ${email}`);
-            } else {
-                alert(`Спасибо, ${name}! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время на email: ${email}`);
-            }
-            
-            // Очищаємо форму
-            document.getElementById('contactForm').reset();
-            
-            // Плавно скролимо до верху
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         });
         
         // Плавна навігація по якорям
@@ -1088,7 +1247,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
