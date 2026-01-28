@@ -2,8 +2,11 @@
 <html lang="uk" id="htmlLang">
 <head>
 	
-	<!-- Plausible Analytics -->
-    <script defer data-domain="svetonoscy.online" src="https://plausible.io/js/script.js"></script>
+	<!-- Plausible Analytics - будемо завантажувати динамічно після згоди -->
+	<script>
+		// Plausible буде завантажено динамічно після згоди на cookies
+		// Початковий скрипт видалено для відповідності GDPR
+	</script>
 
     <!-- SEO -->
     <link rel="canonical" href="https://svetonoscy.online/">
@@ -371,7 +374,55 @@
             font-style: italic;
         }
         
-        /* БЛОК 8. КОНТАКТИ */
+        /* БЛОК 8. ВІДГУКИ */
+        .reviews {
+            background-color: var(--bg-sections);
+        }
+        
+        .reviews-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .reviews-placeholder {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            border: 2px dashed rgba(78, 107, 74, 0.3);
+        }
+        
+        .reviews-icon {
+            font-size: 4rem;
+            color: var(--decorative);
+            margin-bottom: 2rem;
+        }
+        
+        /* БЛОК 9. FAQ */
+        .faq {
+            background-color: var(--bg-main);
+        }
+        
+        .faq-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .faq-placeholder {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            border: 2px dashed rgba(78, 107, 74, 0.3);
+        }
+        
+        .faq-icon {
+            font-size: 4rem;
+            color: var(--decorative);
+            margin-bottom: 2rem;
+        }
+        
+        /* БЛОК 10. КОНТАКТИ */
         .contacts {
             background-color: var(--bg-sections);
         }
@@ -494,7 +545,7 @@
             to { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
-        /* БЛОК 9. ДИСКЛЕЙМЕР */
+        /* БЛОК 11. ДИСКЛЕЙМЕР */
         .disclaimer {
             background-color: var(--text-main);
             color: var(--text-light);
@@ -537,6 +588,131 @@
         .lang-btn.active {
             background: var(--accent);
             color: white;
+        }
+        
+        /* Стилі для GDPR checkbox */
+        .consent-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+        }
+        
+        .consent-checkbox input[type="checkbox"] {
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .consent-checkbox a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        .consent-checkbox a:hover {
+            text-decoration: none;
+        }
+        
+        /* Стилі для Cookie Banner */
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--text-main);
+            color: var(--text-light);
+            padding: 20px;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cookie-banner-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .cookie-text {
+            flex: 1;
+            min-width: 300px;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .cookie-text a {
+            color: var(--decorative);
+            text-decoration: underline;
+        }
+        
+        .cookie-text a:hover {
+            text-decoration: none;
+        }
+        
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        .cookie-btn {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cookie-accept {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+        
+        .cookie-accept:hover {
+            background: #3d553a;
+        }
+        
+        .cookie-reject {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .cookie-reject:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Стилі для Privacy Notice */
+        .privacy-notice {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .privacy-notice h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+        
+        .privacy-notice p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .privacy-notice a {
+            color: var(--decorative);
+            text-decoration: underline;
+        }
+        
+        .privacy-notice a:hover {
+            text-decoration: none;
         }
         
         /* Адаптивність */
@@ -606,6 +782,28 @@
 				padding: 0.5rem 1rem;
 				font-size: 0.9rem;
 			}
+            
+            .cookie-banner-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cookie-text {
+                min-width: 100%;
+            }
+            
+            .cookie-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .reviews-icon, .faq-icon {
+                font-size: 3rem;
+            }
+            
+            .reviews-placeholder, .faq-placeholder {
+                padding: 3rem 1.5rem;
+            }
         }
 		
 		@media (max-width: 480px) {
@@ -639,7 +837,24 @@
 				font-size: 1rem !important;
 				max-width: 150px !important;
 			}
-
+            
+            .cookie-btn {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .consent-checkbox {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+            
+            .reviews-icon, .faq-icon {
+                font-size: 2.5rem;
+            }
+            
+            .reviews-placeholder, .faq-placeholder {
+                padding: 2rem 1rem;
+            }
 		}
         
         /* Анімація для плавного скролу */
@@ -685,6 +900,20 @@
 	
 </head>
 <body>
+    <!-- Cookie Banner -->
+    <div id="cookie-banner">
+        <div class="container cookie-banner-content">
+            <p class="cookie-text" id="cookieText">
+                Ми використовуємо файли cookie для аналітики, щоб покращувати наш сайт. Детальніше у 
+                <a href="#privacy-notice" id="cookiePolicyLink">Політиці конфіденційності</a>.
+            </p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="cookie-btn cookie-accept" id="cookieAcceptBtn">Прийняти</button>
+                <button id="cookie-reject" class="cookie-btn cookie-reject" id="cookieRejectBtn">Відхилити</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- Мовний перемикач -->
     <div class="language-switcher">
         <button class="lang-btn active" id="langUa">UA</button>
@@ -858,7 +1087,41 @@
         </div>
     </section>
     
-    <!-- БЛОК 8. КОНТАКТИ -->
+    <!-- БЛОК 8. ВІДГУКИ -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <h2 id="reviewsTitle">Відгуки</h2>
+            <div class="reviews-content">
+                <div class="reviews-placeholder">
+                    <div class="reviews-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 id="reviewsSubtitle">Розділ у розробці</h3>
+                    <p id="reviewsText">Ми збираємо відгуки наших клієнтів. Незабаром тут з'явиться інформація.</p>
+                    <p id="reviewsComingSoon">Дякуємо за розуміння!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- БЛОК 9. FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 id="faqTitle">Часті питання</h2>
+            <div class="faq-content">
+                <div class="faq-placeholder">
+                    <div class="faq-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 id="faqSubtitle">Розділ у розробці</h3>
+                    <p id="faqText">Ми готуємо відповіді на найпоширеніші запитання. Незабаром розділ буде доступний.</p>
+                    <p id="faqComingSoon">Якщо у вас є питання, напишіть нам у розділі Контакти.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- БЛОК 10. КОНТАКТИ -->
     <section class="contacts" id="contacts">
         <div class="container">
             <h2 id="contactsTitle">Контакти</h2>
@@ -886,6 +1149,19 @@
                             <label for="message" id="messageLabel">Ваше повідомлення</label>
                             <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
+                        
+                        <!-- GDPR Consent Checkbox -->
+                        <div class="form-group">
+                            <div class="consent-checkbox">
+                                <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                                <label for="privacyConsent" id="consentLabel">
+                                    Я даю згоду на обробку моїх персональних даних відповідно до 
+                                    <a href="#privacy-notice" id="privacyLink">Політики конфіденційності</a>.
+                                    Ваші дані будуть використовуватися виключно для відповіді на ваше повідомлення.
+                                </label>
+                            </div>
+                        </div>
+                        
                         <button type="submit" class="btn btn-block" id="contactBtn">
                             <span class="btn-text" id="contactBtnText">Зв'язатися з нами</span>
                             <span class="btn-spinner"></span>
@@ -896,9 +1172,25 @@
         </div>
     </section>
     
-    <!-- БЛОК 9. ДИСКЛЕЙМЕР -->
+    <!-- БЛОК 11. ДИСКЛЕЙМЕР -->
     <footer class="disclaimer">
         <div class="container">
+            <!-- Privacy Notice -->
+            <div class="privacy-notice" id="privacy-notice">
+                <h4 id="privacyTitle">Захист персональних даних</h4>
+                <p id="privacyText1">
+                    Ми збираємо лише дані, необхідні для зв'язку з вами. Ваша інформація не передається третім особам 
+                    (крім EmailJS для відправки повідомлень та Plausible для анонімної аналітики, якщо ви на це погоджуєтесь).
+                </p>
+                <p id="privacyText2">
+                    Надсилаючи форму, ви погоджуєтесь на обробку ваших персональних даних.
+                    Ви можете відкликати згоду або видалити свої дані, написавши на svet0noscy@gmail.com.
+                </p>
+                <p id="privacyText3">
+                    Ми дотримуємося принципів GDPR та CCPA для захисту вашої конфіденційності.
+                </p>
+            </div>
+            
             <p id="disclaimerText1">Енергоінформаційний гіпноз не є медичною послугою та не замінює консультації лікаря чи психотерапевта. Результати роботи можуть відрізнятися в залежності від індивідуальних особливостей клієнта.</p>
             <p id="disclaimerText2">© 2026 Енергоінформаційний гіпноз. Світлоносці. Всі права захищені.</p>
         </div>
@@ -921,16 +1213,18 @@
             uk: {
                 sending: 'Відправляємо...',
                 success: '✓ Дякуємо! Ваше повідомлення успішно відправлено. Ми зв\'яжемося з вами найближчим часом.',
-                error: '✕ Виникла помилка при відправці. Будь ласка, спробуйте ще раз або напишіть на max.mylanych@gmail.com',
+                error: '✕ Виникла помилка при відправці. Будь ласка, спробуйте ще раз або напишіть на svet0noscy@gmail.com',
                 fillAll: '⚠ Будь ласка, заповніть всі поля',
-                invalidEmail: '⚠ Будь ласка, введіть коректний email'
+                invalidEmail: '⚠ Будь ласка, введіть коректний email',
+                consentRequired: '⚠ Будь ласка, дайте згоду на обробку персональних даних'
             },
             ru: {
                 sending: 'Отправляем...',
                 success: '✓ Спасибо! Ваше сообщение успешно отправлено. Мы свяжемся с вами в ближайшее время.',
-                error: '✕ Возникла ошибка при отправке. Пожалуйста, попробуйте еще раз или напишите на max.mylanych@gmail.com',
+                error: '✕ Возникла ошибка при отправке. Пожалуйста, попробуйте еще раз или напишите на svet0noscy@gmail.com',
                 fillAll: '⚠ Пожалуйста, заполните все поля',
-                invalidEmail: '⚠ Пожалуйста, введите корректный email'
+                invalidEmail: '⚠ Пожалуйста, введите корректный email',
+                consentRequired: '⚠ Пожалуйста, дайте согласие на обработку персональных данных'
             }
         };
 
@@ -967,10 +1261,16 @@
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value.trim();
+            const consent = document.getElementById('privacyConsent').checked;
             
             // Валідація
             if (!name || !email || !message) {
                 showStatusMessage(msg.fillAll, 'error');
+                return;
+            }
+            
+            if (!consent) {
+                showStatusMessage(msg.consentRequired, 'error');
                 return;
             }
             
@@ -993,7 +1293,9 @@
                 from_name: name,
                 from_email: email,
                 message: message,
-                to_email: 'max.mylanych@gmail.com'
+                to_email: 'svet0noscy@gmail.com',
+                consent_given: 'Так',
+                timestamp: new Date().toLocaleString()
             };
             
             // Відправка через EmailJS
@@ -1058,7 +1360,6 @@
                 ],
                 directionsList2: [
                     "Енергетичне очищення та балансування чакр",
-                    "Робота з інформаційними слідами зниклих людей (у дослідницькому форматі)",
                     "Контакт із інформаційними аспектами померлих",
                     "Допомога у визначенні життєвого призначення",
                     "Взаємодія з вищими аспектами (Вище Я, Наставники та ін.)",
@@ -1079,6 +1380,14 @@
                 aboutTitle: "Про нас",
                 maximRole: "оператор · контактер",
                 allaRole: "контактер · оператор",
+                reviewsTitle: "Відгуки",
+                reviewsSubtitle: "Розділ у розробці",
+                reviewsText: "Ми збираємо відгуки наших клієнтів. Незабаром тут з'явиться інформація.",
+                reviewsComingSoon: "Дякуємо за розуміння!",
+                faqTitle: "Часті питання",
+                faqSubtitle: "Розділ у розробці",
+                faqText: "Ми готуємо відповіді на найпоширеніші запитання. Незабаром розділ буде доступний.",
+                faqComingSoon: "Якщо у вас є питання, напишіть нам у розділі Контакти.",
                 contactsTitle: "Контакти",
                 contactText1: "Якщо жоден пункт не описав вашу ситуацію — напишіть нам.",
                 contactText2: "Ми розглянемо ваш запит індивідуально та запропонуємо найбільш ефективний підхід для вирішення вашої ситуації.",
@@ -1087,7 +1396,15 @@
                 nameLabel: "Ваше ім'я",
                 emailLabel: "Електронна пошта",
                 messageLabel: "Ваше повідомлення",
+                consentLabel: "Я даю згоду на обробку моїх персональних даних відповідно до <a href='#privacy-notice'>Політики конфіденційності</a>. Ваші дані будуть використовуватися виключно для відповіді на ваше повідомлення.",
                 contactBtnText: "Зв'язатися з нами",
+                cookieText: "Ми використовуємо файли cookie для аналітики, щоб покращувати наш сайт. Детальніше у <a href='#privacy-notice'>Політиці конфіденційності</a>.",
+                cookieAcceptBtn: "Прийняти",
+                cookieRejectBtn: "Відхилити",
+                privacyTitle: "Захист персональних даних",
+                privacyText1: "Ми збираємо лише дані, необхідні для зв'язку з вами. Ваша інформація не передається третім особам (крім EmailJS для відправки повідомлень та Plausible для анонімної аналітики, якщо ви на це погоджуєтесь).",
+                privacyText2: "Надсилаючи форму, ви погоджуєтесь на обробку ваших персональних даних. Ви можете відкликати згоду або видалити свої дані, написавши на svet0noscy@gmail.com.",
+                privacyText3: "Ми дотримуємося принципів GDPR та CCPA для захисту вашої конфіденційності.",
                 disclaimerText1: "Енергоінформаційний гіпноз не є медичною послугою та не замінює консультації лікаря чи психотерапевта. Результати роботи можуть відрізнятися в залежності від індивідуальних особливостей клієнта.",
                 disclaimerText2: "© 2026 Енергоінформаційний гіпноз. Світлоносці. Всі права захищені."
             },
@@ -1114,7 +1431,7 @@
                 feature4Text: "Для работы используются фото- и видеоматериалы от заказчика. Сеансы проводятся без участия клиента.",
                 directionsTitle: "Направления работы",
                 directionsList1: [
-                    "Исследование астральной проекции человека или объекта с целью выявления и очищения негативных программ и влияний",
+                    "Исследование астральной проекции человека или объекта с целью выявления и очищения негативных программ и влияйствий",
                     "Работа с энергоцентрами для гармонизации общего состояния",
                     "Решение межличностных конфликтов и улучшение отношений",
                     "Формирование индивидуальной энергетической защиты",
@@ -1122,7 +1439,6 @@
                 ],
                 directionsList2: [
                     "Энергетическое очищение и балансировка чакр",
-                    "Работа с информационными следами пропавших людей (в исследовательском формате)",
                     "Контакт с информационными аспектами умерших",
                     "Помощь в определении жизненного предназначения",
                     "Взаимодействие с высшими аспектами (Высшее Я, Наставники и др.)",
@@ -1143,6 +1459,14 @@
                 aboutTitle: "О нас",
                 maximRole: "оператор · контактер",
                 allaRole: "контактер · оператор",
+                reviewsTitle: "Отзывы",
+                reviewsSubtitle: "Раздел в разработке",
+                reviewsText: "Мы собираем отзывы наших клиентов. Скоро здесь появится информация.",
+                reviewsComingSoon: "Спасибо за понимание!",
+                faqTitle: "Частые вопросы",
+                faqSubtitle: "Раздел в разработке",
+                faqText: "Мы готовим ответы на самые распространенные вопросы. Скоро раздел будет доступен.",
+                faqComingSoon: "Если у вас есть вопросы, напишите нам в разделе Контакты.",
                 contactsTitle: "Контакты",
                 contactText1: "Если ни один пункт не описал вашу ситуацию — напишите нам.",
                 contactText2: "Мы рассмотрим ваш запрос индивидуально и предложим наиболее эффективный подход для решения вашей ситуации.",
@@ -1151,7 +1475,15 @@
                 nameLabel: "Ваше имя",
                 emailLabel: "Электронная почта",
                 messageLabel: "Ваше сообщение",
+                consentLabel: "Я даю согласие на обработку моих персональных данных в соответствии с <a href='#privacy-notice'>Политикой конфиденциальности</a>. Ваши данные будут использоваться исключительно для ответа на ваше сообщение.",
                 contactBtnText: "Связаться с нами",
+                cookieText: "Мы используем файлы cookie для аналитики, чтобы улучшать наш сайт. Подробнее в <a href='#privacy-notice'>Политике конфиденциальности</a>.",
+                cookieAcceptBtn: "Принять",
+                cookieRejectBtn: "Отклонить",
+                privacyTitle: "Защита персональных данных",
+                privacyText1: "Мы собираем только данные, необходимые для связи с вами. Ваша информация не передается третьим лицам (кроме EmailJS для отправки сообщений и Plausible для анонимной аналитики, если вы на это соглашаетесь).",
+                privacyText2: "Отправляя форму, вы соглашаетесь на обработку ваших персональных данных. Вы можете отозвать согласие или удалить свои данные, написав на svet0noscy@gmail.com.",
+                privacyText3: "Мы соблюдаем принципы GDPR и CCPA для защиты вашей конфиденциальности.",
                 disclaimerText1: "Энергоинформационный гипноз не является медицинской услугой и не заменяет консультации врача или психотерапевта. Результаты работы могут отличаться в зависимости от индивидуальных особенностей клиента.",
                 disclaimerText2: "© 2026 Энергоинформационный гипноз. Светоносцы. Все права защищены."
             }
@@ -1187,6 +1519,9 @@
                         for (let i = 0; i < listItems.length && i < items.length; i++) {
                             listItems[i].textContent = items[i];
                         }
+                    } else if (key === 'consentLabel' || key === 'cookieText') {
+                        // Особлива обробка для HTML контенту
+                        element.innerHTML = translations[lang][key];
                     } else {
                         element.textContent = translations[lang][key];
                     }
@@ -1211,12 +1546,63 @@
             }
         }
 
+        // Cookie Banner Logic
+        function setupCookieBanner() {
+            const cookieBanner = document.getElementById('cookie-banner');
+            const cookieAcceptBtn = document.getElementById('cookie-accept');
+            const cookieRejectBtn = document.getElementById('cookie-reject');
+            
+            // Перевіряємо, чи користувач вже прийняв cookie
+            const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+            
+            if (cookiesAccepted === null) {
+                // Показуємо banner, якщо немає збереженого вибору
+                setTimeout(() => {
+                    cookieBanner.style.display = 'block';
+                }, 1000);
+            } else if (cookiesAccepted === 'true') {
+                // Якщо прийняв, завантажуємо Plausible
+                loadPlausible();
+            }
+            
+            // Обробник для кнопки "Прийняти"
+            cookieAcceptBtn.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieBanner.style.display = 'none';
+                loadPlausible();
+            });
+            
+            // Обробник для кнопки "Відхилити"
+            cookieRejectBtn.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'false');
+                cookieBanner.style.display = 'none';
+            });
+        }
+        
+        // Функція для завантаження Plausible Analytics
+        function loadPlausible() {
+            if (localStorage.getItem('cookiesAccepted') === 'true') {
+                const script = document.createElement('script');
+                script.defer = true;
+                script.dataset.domain = "svetonoscy.online";
+                script.src = "https://plausible.io/js/script.js";
+                document.head.appendChild(script);
+                console.log('Plausible Analytics завантажено');
+            }
+        }
+
         // Ініціалізація при завантаженні сторінки
         document.addEventListener('DOMContentLoaded', function() {
             loadLanguage();
+            setupCookieBanner();
             
             document.getElementById('langUa').addEventListener('click', () => changeLanguage('uk'));
             document.getElementById('langRu').addEventListener('click', () => changeLanguage('ru'));
+            
+            // Завантажуємо Plausible, якщо cookie вже прийняті
+            if (localStorage.getItem('cookiesAccepted') === 'true') {
+                loadPlausible();
+            }
         });
 
         // Фіксована навігація при скролі
@@ -1249,5 +1635,3 @@
     </script>
 </body>
 </html>
-
-
