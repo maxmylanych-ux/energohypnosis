@@ -114,6 +114,11 @@
             margin-bottom: 1rem;
         }
         
+        h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
         p {
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
@@ -332,42 +337,37 @@
             color: var(--accent);
         }
         
-        /* БЛОК 7. ПРО НАС */
+        /* БЛОК 7. ПРО НАС - ОНОВЛЕНА ВЕРСІЯ */
         .about {
             background-color: var(--bg-main);
         }
         
-        .about-content {
+        .about-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 4rem;
-            align-items: center;
+            align-items: stretch;
+            justify-content: center;
+            gap: 3rem;
         }
         
         .about-person {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
+            max-width: 280px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .person-photo {
-            width: 250px;
-            height: 400px;
+            width: 100%;
+            height: 380px;
             background-color: var(--bg-sections);
             border-radius: 10px;
             margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-        }
-        
-        .person-photo i {
-            font-size: 3rem;
-            color: var(--decorative);
-            margin-bottom: 1rem;
+            flex-shrink: 0;
         }
         
         .person-photo img {
@@ -382,60 +382,243 @@
             font-size: 1.8rem;
             color: var(--accent);
             margin-bottom: 0.5rem;
+            flex-shrink: 0;
         }
         
         .person-role {
             font-size: 1rem;
             color: var(--text-main);
             font-style: italic;
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
         }
         
-        /* БЛОК 8. ВІДГУКИ */
+        /* Текст між фото - ОНОВЛЕНА ВЕРСІЯ */
+        .about-text-center {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        
+        .about-text-center p {
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+        
+        /* Стилі для соцмереж */
+        .social-block {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(78, 107, 74, 0.1);
+        }
+        
+        .social-subtitle {
+            font-family: 'Cormorant', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 107, 74, 0.2);
+        }
+        
+        /* БЛОК 8. ВІДГУКИ - ОНОВЛЕНА ВЕРСІЯ */
         .reviews {
             background-color: var(--bg-sections);
         }
         
-        .reviews-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        .reviews-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2rem;
         }
         
-        .reviews-placeholder {
+        .review-card {
             background-color: rgba(255, 255, 255, 0.5);
-            padding: 4rem 2rem;
-            border-radius: 10px;
-            border: 2px dashed rgba(78, 107, 74, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(78, 107, 74, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
-        .reviews-icon {
-            font-size: 4rem;
-            color: var(--decorative);
-            margin-bottom: 2rem;
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         }
         
-        /* БЛОК 9. FAQ */
+        /* Для 5 карток: 3 у першому рядку, 2 по центру у другому */
+        .reviews-container .review-card {
+            flex: 1 1 calc(33.333% - 2rem);
+            min-width: 300px;
+            max-width: calc(33.333% - 2rem);
+        }
+        
+        /* Останні 2 картки - особливі стилі */
+        .reviews-container .review-card:nth-child(4),
+        .reviews-container .review-card:nth-child(5) {
+            flex: 0 1 calc(50% - 2rem);
+            max-width: calc(50% - 2rem);
+            margin: 0 auto;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-avatar {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-right: 1rem;
+        }
+        
+        .review-author h4 {
+            margin-bottom: 0.3rem;
+            color: var(--accent);
+        }
+        
+        .review-author p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            opacity: 0.7;
+            margin-bottom: 0;
+        }
+        
+        .review-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        /* Посилання на відео внизу сторінки */
+        .review-video-section {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(78, 107, 74, 0.1);
+        }
+        
+        .review-video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: rgba(78, 107, 74, 0.05);
+        }
+        
+        .review-video-link:hover {
+            color: var(--text-light);
+            background-color: var(--accent);
+            gap: 1rem;
+        }
+        
+        .review-video-link i {
+            font-size: 1.5rem;
+        }
+        
+        /* БЛОК 9. FAQ - ОНОВЛЕНА ВЕРСІЯ */
         .faq {
             background-color: var(--bg-main);
         }
         
-        .faq-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        .faq-container {
+            max-width: 900px;
+            margin: 3rem auto 0;
         }
         
-        .faq-placeholder {
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 4rem 2rem;
+        .faq-item {
+            margin-bottom: 1.8rem;
             border-radius: 10px;
-            border: 2px dashed rgba(78, 107, 74, 0.3);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(78, 107, 74, 0.1);
+        }
+        
+        .faq-question {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Cormorant', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(78, 107, 74, 0.1);
         }
         
         .faq-icon {
-            font-size: 4rem;
-            color: var(--decorative);
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            background-color: white;
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1.5rem 2rem 2rem;
+            max-height: 1000px;
         }
         
         /* БЛОК 10. КОНТАКТИ */
@@ -732,6 +915,51 @@
         }
         
         /* Адаптивність */
+        @media (max-width: 1100px) {
+            .about-person {
+                min-width: 250px;
+                max-width: 250px;
+            }
+            
+            .person-photo {
+                height: 350px;
+            }
+            
+            .reviews-container .review-card {
+                flex: 1 1 calc(50% - 1.5rem);
+                max-width: calc(50% - 1.5rem);
+            }
+            
+            .reviews-container .review-card:nth-child(4),
+            .reviews-container .review-card:nth-child(5) {
+                flex: 1 1 calc(50% - 1.5rem);
+                max-width: calc(50% - 1.5rem);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .about-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 2.5rem;
+            }
+            
+            .about-person {
+                max-width: 300px;
+                width: 100%;
+            }
+            
+            .about-text-center {
+                order: 3;
+                margin-top: 0;
+                max-width: 600px;
+            }
+            
+            .person-photo {
+                height: 380px;
+            }
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -813,12 +1041,67 @@
                 justify-content: center;
             }
             
-            .reviews-icon, .faq-icon {
-                font-size: 3rem;
+            /* Адаптивність для блоку Про нас */
+            .about-person {
+                min-width: 100%;
+                max-width: 300px;
             }
             
-            .reviews-placeholder, .faq-placeholder {
-                padding: 3rem 1.5rem;
+            .person-photo {
+                width: 250px;
+                height: 380px;
+            }
+            
+            .social-block {
+                margin-top: 2rem;
+                padding-top: 1.5rem;
+            }
+            
+            /* Адаптивність для відгуків */
+            .reviews-container .review-card,
+            .reviews-container .review-card:nth-child(4),
+            .reviews-container .review-card:nth-child(5) {
+                flex: 1 1 100%;
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            .review-card {
+                padding: 1.5rem;
+            }
+            
+            .review-video-section {
+                margin-top: 2rem;
+                padding-top: 1.5rem;
+            }
+            
+            .review-video-link {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            
+            /* Адаптивність для FAQ */
+            .faq-question {
+                padding: 1.2rem 1.5rem;
+                font-size: 1.2rem;
+            }
+            
+            .faq-answer {
+                padding: 0 1.5rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 1.2rem 1.5rem 1.5rem;
+            }
+            
+            .social-icons {
+                gap: 1.2rem;
+            }
+            
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
         }
 		
@@ -864,12 +1147,49 @@
                 line-height: 1.4;
             }
             
-            .reviews-icon, .faq-icon {
-                font-size: 2.5rem;
+            .person-photo {
+                width: 200px;
+                height: 300px;
             }
             
-            .reviews-placeholder, .faq-placeholder {
-                padding: 2rem 1rem;
+            .social-icons {
+                gap: 1rem;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .about-person {
+                min-width: 100%;
+                max-width: 100%;
+            }
+            
+            .social-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .review-card {
+                padding: 1.2rem;
+            }
+            
+            .reviews-container {
+                gap: 1.2rem;
+            }
+            
+            .faq-question {
+                padding: 1rem 1.2rem;
+                font-size: 1.1rem;
+            }
+            
+            .faq-icon {
+                font-size: 1rem;
+            }
+            
+            .about-text-center {
+                padding: 0;
             }
 		}
         
@@ -1084,7 +1404,8 @@
     <section class="about" id="about">
         <div class="container">
             <h2 id="aboutTitle">Про нас</h2>
-            <div class="about-content">
+            <div class="about-container">
+                <!-- Перше фото зліва -->
                 <div class="about-person">
                     <div class="person-photo">
                         <img src="images/maksym2.png" alt="Максим">
@@ -1092,12 +1413,32 @@
                     <div class="person-name">Максим</div>
                     <div class="person-role" id="maximRole">оператор · контактер</div>
                 </div>
+                
+                <!-- Текст між фото -->
+                <div class="about-text-center">
+                    <p id="aboutDescription">Ми понад п'ять років практикуємо енергоінформаційний гіпноз, поєднуючи практичний досвід та уважне ставлення до енергоінформаційної гігієни. У роботі використовуємо дієві інструменти взаємодії з астральною оболонкою та енергоінформаційним полем, спрямовані на дослідження станів і м'яку корекцію можливих дисбалансів. За цей час до нас звернулися десятки клієнтів, які відзначають позитивні зміни у своєму внутрішньому стані. Окрім індивідуальної роботи, ми також публікуємо в соціальних мережах просвітницькі матеріали, отримані в процесі взаємодії з вищими енергоінформаційними аспектами.</p>
+                </div>
+                
+                <!-- Друге фото справа -->
                 <div class="about-person">
                     <div class="person-photo">
                         <img src="images/alla2.jpg" alt="Алла">
                     </div>
                     <div class="person-name">Алла</div>
                     <div class="person-role" id="allaRole">контактер · оператор</div>
+                </div>
+            </div>
+            
+            <!-- Блок соцмереж -->
+            <div class="social-block">
+                <div class="social-subtitle" id="socialSubtitle">Ми у соцмережах</div>
+                <div class="social-icons">
+                    <a href="https://www.tiktok.com/@svetonoscy" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://youtube.com/@ваш_канал" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1107,15 +1448,84 @@
     <section class="reviews" id="reviews">
         <div class="container">
             <h2 id="reviewsTitle">Відгуки</h2>
-            <div class="reviews-content">
-                <div class="reviews-placeholder">
-                    <div class="reviews-icon">
-                        <i class="fas fa-comments"></i>
+            <div class="reviews-container">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Жінка, 37 років</h4>
+                        </div>
                     </div>
-                    <h3 id="reviewsSubtitle">Розділ у розробці</h3>
-                    <p id="reviewsText">Ми збираємо відгуки наших клієнтів. Незабаром тут з'явиться інформація.</p>
-                    <p id="reviewsComingSoon">Дякуємо за розуміння!</p>
+                    <div class="review-text">
+                        <p>Після сеансу сканування та чистки я знову можу дихати на повні груди, є чітке розуміння причин стану, зменшилась тривожність, прийшло відчуття внутрішньої стабільності. Зміни відбувалися поступово, але були стійкими.</p>
+                    </div>
                 </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Чоловік, 42 роки</h4>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>Запит стосувався складних стосунків у сім'ї та постійного відчуття «глухого кута». В ході роботи виявилось енергетичне втручання. Результат: змінилось сприйняття деяких ситуацій, з'явилась можливість по-іншому реагувати та приймати рішення без внутрішнього тиску. Робота дала глибоке усвідомлення.</p>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Жінка, 29 років</h4>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>Прийшла з питанням втрати сенсу та емоційного вигорання. Після сеансу спілкування з енергоінформаційним аспектом з'ясувались причини, що дало мені можливість переглянути своє теперішнє життя, повернулась концентрація, зникло відчуття внутрішнього хаосу.</p>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Чоловік, 35 років</h4>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>Звертався без чіткого запиту — було відчуття, що «щось не так», але складно пояснити. Робота допомогла структурувати внутрішній стан, з'явилось відчуття опори й ясності. Особливо цінним був детальний зворотний зв'язок після сеансу.</p>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Жінка, 46 років</h4>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        <p>Запит — повторювані емоційні стани та відчуття виснаження. Після прослуховування аудіо з елементами регресивної роботи відчула полегшення і внутрішню тишу, є ясність що потрібно змінити в житті. Зміни проявляються не одразу, але через кілька тижнів стало помітно, що життя "зсунулось з мертвої точки".</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Відеовідгук внизу -->
+            <div class="review-video-section">
+                <a href="https://youtube.com/ваше_посилання" target="_blank" rel="noopener noreferrer" class="review-video-link" id="reviewVideoLink">
+                    <i class="fab fa-youtube"></i>
+                    <span>Відгуки</span>
+                </a>
             </div>
         </div>
     </section>
@@ -1124,14 +1534,105 @@
     <section class="faq" id="faq">
         <div class="container">
             <h2 id="faqTitle">Часті питання</h2>
-            <div class="faq-content">
-                <div class="faq-placeholder">
-                    <div class="faq-icon">
-                        <i class="fas fa-question-circle"></i>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion1">
+                        <span>Чи безпечно це?</span>
+                        <i class="fas fa-plus faq-icon"></i>
                     </div>
-                    <h3 id="faqSubtitle">Розділ у розробці</h3>
-                    <p id="faqText">Ми готуємо відповіді на найпоширеніші запитання. Незабаром розділ буде доступний.</p>
-                    <p id="faqComingSoon">Якщо у вас є питання, напишіть нам у розділі Контакти.</p>
+                    <div class="faq-answer" id="faqAnswer1">
+                        <p>Так. Робота проводиться у контрольованому форматі, без впливу на психіку клієнта. Ми не використовуємо методів навіювання чи примусу.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion2">
+                        <span>Чи потрібно мені бути присутнім під час сесії?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer2">
+                        <p>Ні. Робота проводиться дистанційно, без безпосередньої участі клієнта. Ви надаєте необхідну інформацію заздалегідь.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion3">
+                        <span>Це гіпноз у класичному розумінні?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer3">
+                        <p>Ні. Це не сценічний і не директивний гіпноз. Метод ґрунтується на стані глибокого трансового занурення та структурованої роботи з енергоінформаційним полем.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion4">
+                        <span>Чи замінює це психолога або лікаря?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer4">
+                        <p>Ні. Ми не надаємо медичних або психотерапевтичних послуг. Метод використовується для роботи з астральною проекцією людини, зміни на енергетичному рівні в свою чергу можуть впливати на фізичний стан. У випадку "запущеної" ситуації з фізичним тілом медичне втручання необхідне.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion5">
+                        <span>Які запити можна опрацьовувати?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer5">
+                        <p>Працюємо з більшістю запитів. Допомагаємо підібрати найефективніший вид роботи.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion6">
+                        <span>Чи є гарантія результату?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer6">
+                        <p>Наша робота безумовно створить плацдарм для подальших змін. Фінальний результат залежить від людини та її готовності до внутрішніх змін. Ми гарантуємо коректний і відповідальний процес роботи.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion7">
+                        <span>Скільки сесій потрібно?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer7">
+                        <p>У багатьох випадках достатньо однієї. За потреби можливе продовження роботи — індивідуально.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion8">
+                        <span>Коли з'являється ефект?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer8">
+                        <p>У частини людей — одразу, у інших — протягом кількох днів або тижнів. Зміни часто мають поступовий характер і потребують часу для інтеграції.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion9">
+                        <span>Чи підходить метод усім?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer9">
+                        <p>Простіше пояснити на прикладі. Якщо людина очікує швидких "чудес" або не готова до усвідомленої внутрішньої роботи, метод може не дати очікуваного ефекту. Наша робота на енергоінформаційному рівні результативна, але без внутрішніх змін результат може бути короткочасним.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" id="faqQuestion10">
+                        <span>Як підготуватися до роботи?</span>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer" id="faqAnswer10">
+                        <p>Спеціальної підготовки або зміненого стану свідомості не потрібно.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1200,7 +1701,7 @@
                 </p>
                 <p id="privacyText2">
                     Надсилаючи форму, ви погоджуєтесь на обробку ваших персональних даних.
-                    Ви можете відкликати згоду або видалити свої дані, написавши на svet0noscy@gmail.com.
+                    Ви можете відкликати згоду або видалити свої дані, написавши на <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4437322130742a2b37273d042329252d286a272b29">[email&#160;protected]</a>.
                 </p>
                 <p id="privacyText3">
                     Ми дотримуємося принципів GDPR та CCPA для захисту вашої конфіденційності.
@@ -1212,11 +1713,10 @@
         </div>
     </footer>
     
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ======= EMAILJS КОНФІГУРАЦІЯ =======
-        // ВАЖЛИВО: Замініть YOUR_PUBLIC_KEY на ваш справжній ключ!
         (function() {
-            emailjs.init("loZF-pPgxYrokhmAD"); // Отримайте тут: https://dashboard.emailjs.com/admin/account
+            emailjs.init("loZF-pPgxYrokhmAD");
         })();
 
         const EMAILJS_CONFIG = {
@@ -1224,7 +1724,6 @@
             templateID: 'template_9gl70w8'
         };
 
-        // Тексти повідомлень для обох мов
         const emailMessages = {
             uk: {
                 sending: 'Відправляємо...',
@@ -1244,42 +1743,35 @@
             }
         };
 
-        // Функція показу повідомлення
         function showStatusMessage(text, type) {
             const statusMessage = document.getElementById('statusMessage');
             statusMessage.textContent = text;
             statusMessage.className = `status-message ${type}`;
             statusMessage.style.display = 'block';
             
-            // Плавний скрол до повідомлення
             statusMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             
-            // Автоматично приховати через 8 секунд
             setTimeout(() => {
                 statusMessage.style.display = 'none';
             }, 8000);
         }
 
-        // Функція валідації email
         function isValidEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(email);
         }
 
-        // Обробка форми
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const currentLang = document.getElementById('htmlLang').getAttribute('lang');
             const msg = emailMessages[currentLang];
             
-            // Отримуємо значення полів
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value.trim();
             const consent = document.getElementById('privacyConsent').checked;
             
-            // Валідація
             if (!name || !email || !message) {
                 showStatusMessage(msg.fillAll, 'error');
                 return;
@@ -1295,7 +1787,6 @@
                 return;
             }
             
-            // Показуємо індикатор завантаження
             const submitBtn = document.getElementById('contactBtn');
             const btnText = document.getElementById('contactBtnText');
             const originalText = btnText.textContent;
@@ -1304,7 +1795,6 @@
             submitBtn.disabled = true;
             btnText.textContent = msg.sending;
             
-            // Параметри для EmailJS шаблону
             const templateParams = {
                 from_name: name,
                 from_email: email,
@@ -1314,7 +1804,6 @@
                 timestamp: new Date().toLocaleString()
             };
             
-            // Відправка через EmailJS
             emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
                 .then(function(response) {
                     console.log('✓ Email успішно відправлено:', response.status, response.text);
@@ -1326,14 +1815,12 @@
                     showStatusMessage(msg.error, 'error');
                 })
                 .finally(function() {
-                    // Приховуємо індикатор завантаження
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
                     btnText.textContent = originalText;
                 });
         });
 
-        // Приховати повідомлення при введенні у форму
         document.getElementById('contactForm').addEventListener('input', function() {
             const statusMessage = document.getElementById('statusMessage');
             if (statusMessage.style.display === 'block') {
@@ -1343,7 +1830,6 @@
 
         // ======= МОВНИЙ ПЕРЕМИКАЧ =======
         
-        // Тексти для української мови
         const translations = {
             uk: {
                 pageTitle: "Енергоінформаційний гіпноз | Світлоносці",
@@ -1394,16 +1880,33 @@
                 trainingText2: "Програма навчання включає теоретичні основи, практичні техніки, етичні аспекти роботи, а також супервізію ваших перших сеансів. Навчання проходить у форматі індивідуальних або групових занять.",
                 trainingText3: "Для детальнішої інформації про умови та вартість навчання звертайтеся до нас.",
                 aboutTitle: "Про нас",
+                aboutDescription: "Ми понад п'ять років практикуємо енергоінформаційний гіпноз, поєднуючи практичний досвід та уважне ставлення до енергоінформаційної гігієни. У роботі використовуємо дієві інструменти взаємодії з астральною оболонкою та енергоінформаційним полем, спрямовані на дослідження станів і м'яку корекцію можливих дисбалансів. За цей час до нас звернулися десятки клієнтів, які відзначають позитивні зміни у своєму внутрішньому стані. Окрім індивідуальної роботи, ми також публікуємо в соціальних мережах просвітницькі матеріали, отримані в процесі взаємодії з вищими енергоінформаційними аспектами.",
                 maximRole: "оператор · контактер",
                 allaRole: "контактер · оператор",
+                socialSubtitle: "Ми у соцмережах",
                 reviewsTitle: "Відгуки",
-                reviewsSubtitle: "Розділ у розробці",
-                reviewsText: "Ми збираємо відгуки наших клієнтів. Незабаром тут з'явиться інформація.",
-                reviewsComingSoon: "Дякуємо за розуміння!",
+                reviewVideoLink: "Відгуки",
                 faqTitle: "Часті питання",
-                faqSubtitle: "Розділ у розробці",
-                faqText: "Ми готуємо відповіді на найпоширеніші запитання. Незабаром розділ буде доступний.",
-                faqComingSoon: "Якщо у вас є питання, напишіть нам у розділі Контакти.",
+                faqQuestion1: "Чи безпечно це?",
+                faqAnswer1: "Так. Робота проводиться у контрольованому форматі, без впливу на психіку клієнта. Ми не використовуємо методів навіювання чи примусу.",
+                faqQuestion2: "Чи потрібно мені бути присутнім під час сесії?",
+                faqAnswer2: "Ні. Робота проводиться дистанційно, без безпосередньої участі клієнта. Ви надаєте необхідну інформацію заздалегідь.",
+                faqQuestion3: "Це гіпноз у класичному розумінні?",
+                faqAnswer3: "Ні. Це не сценічний і не директивний гіпноз. Метод ґрунтується на стані глибокого трансового занурення та структурованої роботи з енергоінформаційним полем.",
+                faqQuestion4: "Чи замінює це психолога або лікаря?",
+                faqAnswer4: "Ні. Ми не надаємо медичних або психотерапевтичних послуг. Метод використовується для роботи з астральною проекцією людини, зміни на енергетичному рівні в свою чергу можуть впливати на фізичний стан. У випадку 'запущеної' ситуації з фізичним тілом медичне втручання необхідне.",
+                faqQuestion5: "Які запити можна опрацьовувати?",
+                faqAnswer5: "Працюємо з більшістю запитів. Допомагаємо підібрати найефективніший вид роботи.",
+                faqQuestion6: "Чи є гарантія результату?",
+                faqAnswer6: "Наша робота безумовно створить плацдарм для подальших змін. Фінальний результат залежить від людини та її готовності до внутрішніх змін. Ми гарантуємо коректний і відповідальний процес роботи.",
+                faqQuestion7: "Скільки сесій потрібно?",
+                faqAnswer7: "У багатьох випадках достатньо однієї. За потреби можливе продовження роботи — індивідуально.",
+                faqQuestion8: "Коли з'являється ефект?",
+                faqAnswer8: "У частини людей — одразу, у інших — протягом кількох днів або тижнів. Зміни часто мають поступовий характер і потребують часу для інтеграції.",
+                faqQuestion9: "Чи підходить метод усім?",
+                faqAnswer9: "Простіше пояснити на прикладі. Якщо людина очікує швидких 'чудес' або не готова до усвідомленої внутрішньої роботи, метод може не дати очікуваного ефекту. Наша робота на енергоінформаційному рівні результативна, але без внутрішніх змін результат може бути короткочасним.",
+                faqQuestion10: "Як підготуватися до роботи?",
+                faqAnswer10: "Спеціальної підготовки або зміненого стану свідомості не потрібно.",
                 contactsTitle: "Контакти",
                 contactText1: "Якщо жоден пункт не описав вашу ситуацію — напишіть нам.",
                 contactText2: "Ми розглянемо ваш запит індивідуально та запропонуємо найбільш ефективний підхід для вирішення вашої ситуації.",
@@ -1473,16 +1976,33 @@
                 trainingText2: "Программа обучения включает теоретические основы, практические техники, этические аспекты работы, а также супервизию ваших первых сеансов. Обучение проходит в формате индивидуальных или групповых занятий.",
                 trainingText3: "Для более подробной информации об условиях и стоимости обучения обращайтесь к нам.",
                 aboutTitle: "О нас",
+                aboutDescription: "Мы более пяти лет практикуем энергоинформационный гипноз, сочетая практический опыт и внимательное отношение к энергоинформационной гигиене. В работе используем действенные инструменты взаимодействия с астральной оболочкой и энергоинформационным полем, направленные на исследование состояний и мягкую коррекцию возможных дисбалансов. За это время к нам обратились десятки клиентов, которые отмечают положительные изменения в своем внутреннем состоянии. Помимо индивидуальной работы, мы также публикуем в социальных сетях просветительские материалы, полученные в процессе взаимодействия с высшими энергоинформационными аспектами.",
                 maximRole: "оператор · контактер",
                 allaRole: "контактер · оператор",
+                socialSubtitle: "Мы в соцсетях",
                 reviewsTitle: "Отзывы",
-                reviewsSubtitle: "Раздел в разработке",
-                reviewsText: "Мы собираем отзывы наших клиентов. Скоро здесь появится информация.",
-                reviewsComingSoon: "Спасибо за понимание!",
+                reviewVideoLink: "Отзывы",
                 faqTitle: "Частые вопросы",
-                faqSubtitle: "Раздел в разработке",
-                faqText: "Мы готовим ответы на самые распространенные вопросы. Скоро раздел будет доступен.",
-                faqComingSoon: "Если у вас есть вопросы, напишите нам в разделе Контакты.",
+                faqQuestion1: "Это безопасно?",
+                faqAnswer1: "Да. Работа проводится в контролируемом формате, без влияния на психику клиента. Мы не используем методов внушения или принуждения.",
+                faqQuestion2: "Нужно ли мне присутствовать во время сессии?",
+                faqAnswer2: "Нет. Работа проводится дистанционно, без непосредственного участия клиента. Вы предоставляете необходимую информацию заранее.",
+                faqQuestion3: "Это гипноз в классическом понимании?",
+                faqAnswer3: "Нет. Это не сценический и не директивный гипноз. Метод основан на состоянии глубокого трансового погружения и структурированной работы с энергоинформационным полем.",
+                faqQuestion4: "Заменяет ли это психолога или врача?",
+                faqAnswer4: "Нет. Мы не предоставляем медицинских или психотерапевтических услуг. Метод используется для работы с астральной проекцией человека, изменения на энергетическом уровне в свою очередь могут влиять на физическое состояние. В случае 'запущенной' ситуации с физическим телом медицинское вмешательство необходимо.",
+                faqQuestion5: "Какие запросы можно обрабатывать?",
+                faqAnswer5: "Работаем с большинством запросов. Помогаем подобрать наиболее эффективный вид работы.",
+                faqQuestion6: "Есть ли гарантия результата?",
+                faqAnswer6: "Наша работа безусловно создаст плацдарм для дальнейших изменений. Финальный результат зависит от человека и его готовности к внутренним изменениям. Мы гарантируем корректный и ответственный процесс работы.",
+                faqQuestion7: "Сколько сессий нужно?",
+                faqAnswer7: "Во многих случаях достаточно одной. При необходимости возможно продолжение работы — индивидуально.",
+                faqQuestion8: "Когда появляется эффект?",
+                faqAnswer8: "У части людей — сразу, у других — в течение нескольких дней или недель. Изменения часто имеют постепенный характер и требуют времени для интеграции.",
+                faqQuestion9: "Подходит ли метод всем?",
+                faqAnswer9: "Проще объяснить на примере. Если человек ожидает быстрых 'чудес' или не готов к осознанной внутренней работе, метод может не дать ожидаемого эффекта. Наша работа на энергоинформационном уровне результативна, но без внутренних изменений результат может быть кратковременным.",
+                faqQuestion10: "Как подготовиться к работе?",
+                faqAnswer10: "Специальной подготовки или измененного состояния сознания не требуется.",
                 contactsTitle: "Контакты",
                 contactText1: "Если ни один пункт не описал вашу ситуацию — напишите нам.",
                 contactText2: "Мы рассмотрим ваш запрос индивидуально и предложим наиболее эффективный подход для решения вашей ситуации.",
@@ -1505,7 +2025,6 @@
             }
         };
 
-        // Функція для визначення мови за IP
         async function detectLanguageByIP() {
             try {
                 const response = await fetch('https://ipapi.co/json/');
@@ -1522,31 +2041,63 @@
             }
         }
 
-        // Функція для зміни мови
         function changeLanguage(lang) {
+            // Оновлюємо атрибут lang у html
             document.getElementById('htmlLang').setAttribute('lang', lang);
             
+            // Оновлюємо всі тексти з перекладами
             for (const key in translations[lang]) {
                 const element = document.getElementById(key);
                 if (element) {
                     if (key === 'directionsList1' || key === 'directionsList2') {
+                        // Особлива обробка для списків
                         const listItems = element.getElementsByTagName('li');
                         const items = translations[lang][key];
                         for (let i = 0; i < listItems.length && i < items.length; i++) {
                             listItems[i].textContent = items[i];
                         }
                     } else if (key === 'consentLabel' || key === 'cookieText') {
-                        // Особлива обробка для HTML контенту
+                        // HTML контент
                         element.innerHTML = translations[lang][key];
+                    } else if (key === 'reviewVideoLink') {
+                        // Посилання з іконкою
+                        const linkElement = document.getElementById('reviewVideoLink');
+                        if (linkElement) {
+                            const span = linkElement.querySelector('span');
+                            if (span) {
+                                span.textContent = translations[lang][key];
+                            }
+                        }
+                    } else if (key.startsWith('faqQuestion')) {
+                        // Питання FAQ
+                        const questionElement = document.getElementById(key);
+                        if (questionElement) {
+                            const span = questionElement.querySelector('span');
+                            if (span) {
+                                span.textContent = translations[lang][key];
+                            }
+                        }
+                    } else if (key.startsWith('faqAnswer')) {
+                        // Відповіді FAQ
+                        const answerElement = document.getElementById(key);
+                        if (answerElement) {
+                            const p = answerElement.querySelector('p');
+                            if (p) {
+                                p.textContent = translations[lang][key];
+                            }
+                        }
                     } else {
+                        // Звичайний текст
                         element.textContent = translations[lang][key];
                     }
                 }
             }
             
+            // Оновлюємо активну кнопку мови
             document.getElementById('langUa').classList.toggle('active', lang === 'uk');
             document.getElementById('langRu').classList.toggle('active', lang === 'ru');
             
+            // Зберігаємо вибір мови
             localStorage.setItem('preferredLanguage', lang);
         }
 
@@ -1568,34 +2119,28 @@
             const cookieAcceptBtn = document.getElementById('cookie-accept');
             const cookieRejectBtn = document.getElementById('cookie-reject');
             
-            // Перевіряємо, чи користувач вже прийняв cookie
             const cookiesAccepted = localStorage.getItem('cookiesAccepted');
             
             if (cookiesAccepted === null) {
-                // Показуємо banner, якщо немає збереженого вибору
                 setTimeout(() => {
                     cookieBanner.style.display = 'block';
                 }, 1000);
             } else if (cookiesAccepted === 'true') {
-                // Якщо прийняв, завантажуємо Plausible
                 loadPlausible();
             }
             
-            // Обробник для кнопки "Прийняти"
             cookieAcceptBtn.addEventListener('click', function() {
                 localStorage.setItem('cookiesAccepted', 'true');
                 cookieBanner.style.display = 'none';
                 loadPlausible();
             });
             
-            // Обробник для кнопки "Відхилити"
             cookieRejectBtn.addEventListener('click', function() {
                 localStorage.setItem('cookiesAccepted', 'false');
                 cookieBanner.style.display = 'none';
             });
         }
         
-        // Функція для завантаження Plausible Analytics
         function loadPlausible() {
             if (localStorage.getItem('cookiesAccepted') === 'true') {
                 const script = document.createElement('script');
@@ -1607,13 +2152,77 @@
             }
         }
 
-        // Ініціалізація при завантаженні сторінки
+        // FAQ Accordion - ВИПРАВЛЕНО
+        function setupFAQAccordion() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Закрити всі інші елементи
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            if (otherAnswer) {
+                                otherAnswer.style.maxHeight = '0';
+                                otherAnswer.style.padding = '0 2rem';
+                            }
+                        }
+                    });
+                    
+                    // Перемкнути поточний елемент
+                    const isActive = item.classList.contains('active');
+                    item.classList.toggle('active');
+                    const answer = item.querySelector('.faq-answer');
+                    
+                    if (!isActive) {
+                        // Відкрити
+                        if (answer) {
+                            answer.style.maxHeight = answer.scrollHeight + 'px';
+                            answer.style.padding = '1.5rem 2rem 2rem';
+                        }
+                    } else {
+                        // Закрити
+                        if (answer) {
+                            answer.style.maxHeight = '0';
+                            answer.style.padding = '0 2rem';
+                        }
+                    }
+                });
+            });
+            
+            // Відкрити перший елемент за замовчуванням
+            if (faqItems.length > 0) {
+                const firstItem = faqItems[0];
+                firstItem.classList.add('active');
+                const firstAnswer = firstItem.querySelector('.faq-answer');
+                if (firstAnswer) {
+                    firstAnswer.style.maxHeight = firstAnswer.scrollHeight + 'px';
+                    firstAnswer.style.padding = '1.5rem 2rem 2rem';
+                }
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Завантажуємо мову
             loadLanguage();
+            
+            // Налаштовуємо cookie banner
             setupCookieBanner();
             
-            document.getElementById('langUa').addEventListener('click', () => changeLanguage('uk'));
-            document.getElementById('langRu').addEventListener('click', () => changeLanguage('ru'));
+            // Налаштовуємо FAQ акордеон
+            setupFAQAccordion();
+            
+            // Додаємо обробники подій для перемикача мови
+            document.getElementById('langUa').addEventListener('click', () => {
+                changeLanguage('uk');
+            });
+            
+            document.getElementById('langRu').addEventListener('click', () => {
+                changeLanguage('ru');
+            });
             
             // Завантажуємо Plausible, якщо cookie вже прийняті
             if (localStorage.getItem('cookiesAccepted') === 'true') {
@@ -1641,9 +2250,9 @@
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
