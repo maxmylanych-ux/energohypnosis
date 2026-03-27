@@ -455,81 +455,149 @@
             box-shadow: 0 5px 15px rgba(78, 107, 74, 0.2);
         }
         
-        /* БЛОК 8. ВІДГУКИ - ОНОВЛЕНА ВЕРСІЯ */
+        /* БЛОК 8. ВІДГУКИ */
         .reviews {
             background-color: var(--bg-sections);
         }
-        
-        .reviews-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
-        
-        .review-card {
-            background-color: rgba(255, 255, 255, 0.5);
+
+        /* Форма залишення відгуку */
+        .review-form-wrapper {
+            max-width: 620px;
+            margin: 0 auto 3rem;
+            background-color: rgba(255, 255, 255, 0.55);
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(78, 107, 74, 0.1);
+            padding: 2rem 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(78, 107, 74, 0.12);
+        }
+
+        .review-form-title {
+            font-family: 'Cormorant', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+
+        .review-form-wrapper input[type="text"],
+        .review-form-wrapper textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid rgba(78, 107, 74, 0.3);
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            background-color: white;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--text-main);
+        }
+
+        .review-form-wrapper input[type="text"]:focus,
+        .review-form-wrapper textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(78, 107, 74, 0.1);
+        }
+
+        .review-form-wrapper textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .review-form-status {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            font-size: 0.95rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .review-form-status.success {
+            background-color: rgba(78, 107, 74, 0.15);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .review-form-status.error {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: #dc3545;
+            border: 2px solid #dc3545;
+        }
+
+        /* Картки динамічних відгуків */
+        .reviews-dynamic-container {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            gap: 1.5rem;
+            max-width: 750px;
+            margin: 0 auto 2.5rem;
         }
-        
-        .review-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+
+        .review-user-card {
+            background-color: rgba(255, 255, 255, 0.55);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(78, 107, 74, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        /* Для 5 карток: 3 у першому рядку, 2 по центру у другому */
-        .reviews-container .review-card {
-            flex: 1 1 calc(33.333% - 2rem);
-            min-width: 300px;
-            max-width: calc(33.333% - 2rem);
+
+        .review-user-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
         }
-        
-        /* Останні 2 картки - особливі стилі */
-        .reviews-container .review-card:nth-child(4),
-        .reviews-container .review-card:nth-child(5) {
-            flex: 0 1 calc(50% - 2rem);
-            max-width: calc(50% - 2rem);
-            margin: 0 auto;
-        }
-        
-        .review-header {
+
+        .review-user-meta {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
         }
-        
-        .review-avatar {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-right: 1rem;
-        }
-        
-        .review-author h4 {
-            margin-bottom: 0.3rem;
+
+        .review-user-meta i {
+            font-size: 1.8rem;
             color: var(--accent);
         }
-        
-        .review-author p {
-            font-size: 0.9rem;
+
+        .review-user-meta strong {
+            font-family: 'Cormorant', serif;
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+
+        .review-user-date {
+            font-size: 0.82rem;
             color: var(--text-main);
-            opacity: 0.7;
+            opacity: 0.55;
+            margin-left: auto;
+        }
+
+        .review-user-card p {
+            font-size: 1.02rem;
+            line-height: 1.65;
             margin-bottom: 0;
         }
-        
-        .review-text {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            flex-grow: 1;
+
+        .reviews-loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--accent);
+            opacity: 0.65;
+            font-style: italic;
         }
-        
+
+        .reviews-empty {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-main);
+            opacity: 0.6;
+            font-style: italic;
+        }
+
         /* Посилання на відео внизу сторінки */
         .review-video-section {
             margin-top: 3rem;
@@ -1066,16 +1134,12 @@
             }
             
             /* Адаптивність для відгуків */
-            .reviews-container .review-card,
-            .reviews-container .review-card:nth-child(4),
-            .reviews-container .review-card:nth-child(5) {
-                flex: 1 1 100%;
-                max-width: 100%;
-                margin: 0;
-            }
-            
-            .review-card {
+            .review-form-wrapper {
                 padding: 1.5rem;
+            }
+
+            .review-user-card {
+                padding: 1.2rem 1.5rem;
             }
             
             .review-video-section {
@@ -1179,11 +1243,11 @@
                 font-size: 1.2rem;
             }
             
-            .review-card {
-                padding: 1.2rem;
+            .review-user-card {
+                padding: 1rem 1.2rem;
             }
-            
-            .reviews-container {
+
+            .reviews-dynamic-container {
                 gap: 1.2rem;
             }
             
@@ -1460,78 +1524,23 @@
     <section class="reviews" id="reviews">
         <div class="container">
             <h2 id="reviewsTitle">Відгуки</h2>
-            <div class="reviews-container">
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="review-author">
-                            <h4 id="review1Author">Жінка, 37 років</h4>
-                        </div>
-                    </div>
-                    <div class="review-text">
-                        <p id="review1Text">Після сеансу сканування та чистки я знову можу дихати на повні груди, є чітке розуміння причин стану, зменшилась тривожність, прийшло відчуття внутрішньої стабільності. Зміни відбувалися поступово, але були стійкими.</p>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="review-author">
-                            <h4 id="review2Author">Чоловік, 42 роки</h4>
-                        </div>
-                    </div>
-                    <div class="review-text">
-                        <p id="review2Text">Запит стосувався складних стосунків у сім'ї та постійного відчуття «глухого кута». В ході роботи виявилось енергетичне втручання. Результат: змінилось сприйняття деяких ситуацій, з'явилась можливість по-іншому реагувати та приймати рішення без внутрішнього тиску. Робота дала глибоке усвідомлення.</p>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="review-author">
-                            <h4 id="review3Author">Жінка, 29 років</h4>
-                        </div>
-                    </div>
-                    <div class="review-text">
-                        <p id="review3Text">Прийшла з питанням втрати сенсу та емоційного вигорання. Після сеансу спілкування з енергоінформаційним аспектом з'ясувались причини, що дало мені можливість переглянути своє теперішнє життя, повернулась концентрація, зникло відчуття внутрішнього хаосу.</p>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="review-author">
-                            <h4 id="review4Author">Чоловік, 35 років</h4>
-                        </div>
-                    </div>
-                    <div class="review-text">
-                        <p id="review4Text">Звертався без чіткого запиту — було відчуття, що «щось не так», але складно пояснити. Робота допомогла структурувати внутрішній стан, з'явилось відчуття опори й ясності. Особливо цінним був детальний зворотний зв'язок після сеансу.</p>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="review-author">
-                            <h4 id="review5Author">Жінка, 46 років</h4>
-                        </div>
-                    </div>
-                    <div class="review-text">
-                        <p id="review5Text">Запит — повторювані емоційні стани та відчуття виснаження. Після прослуховування аудіо з елементами регресивної роботи відчула полегшення і внутрішню тишу, є ясність що потрібно змінити в житті. Зміни проявляються не одразу, але через кілька тижнів стало помітно, що життя "зсунулось з мертвої точки".</p>
-                    </div>
-                </div>
+
+            <!-- Форма залишення відгуку -->
+            <div class="review-form-wrapper">
+                <div class="review-form-title" id="reviewFormTitle">Залишити відгук</div>
+                <div id="reviewFormStatus" class="review-form-status"></div>
+                <input type="text" id="reviewName" data-placeholder-key="reviewNamePlaceholder" placeholder="Ваше ім'я" maxlength="50" autocomplete="name" />
+                <textarea id="reviewMessage" data-placeholder-key="reviewMessagePlaceholder" placeholder="Ваш відгук" maxlength="600"></textarea>
+                <!-- Honeypot anti-spam (приховане поле — бот заповнить, людина — ні) -->
+                <input type="text" id="reviewHoneypot" name="website" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off" />
+                <button class="btn" onclick="submitReview()" id="reviewSubmitBtn">Надіслати</button>
             </div>
-            
+
+            <!-- Динамічний список останніх 3 відгуків -->
+            <div class="reviews-dynamic-container" id="reviewsDynamicList">
+                <div class="reviews-loading"><i class="fas fa-circle-notch fa-spin"></i> Завантаження відгуків...</div>
+            </div>
+
             <!-- Відеовідгук внизу -->
             <div class="review-video-section">
                 <a href="https://youtube.com/ваше_посилання" target="_blank" rel="noopener noreferrer" class="review-video-link" id="reviewVideoLink">
@@ -1850,6 +1859,149 @@
             }
         });
 
+        // ======= ВІДГУКИ (GOOGLE APPS SCRIPT) =======
+        // Вставте URL вашого Google Apps Script:
+        const REVIEWS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzLNGsbV3NkXyndxEyRrLQb6x7I2AIG2dBEu-tSLvztfTRVQOmw-f2vJnhhKY9BVG_pxA/exec";
+
+        // Завантаження та відображення останніх 3 схвалених відгуків
+        // Повертає поточну мову сторінки
+        function getCurrentLang() {
+            return document.getElementById('htmlLang').getAttribute('lang') || 'uk';
+        }
+
+        // Повертає рядок перекладу для форми відгуків
+        function reviewMsg(key, replacements) {
+            const lang = getCurrentLang();
+            let text = (translations[lang] && translations[lang][key]) ? translations[lang][key] : translations['uk'][key] || key;
+            if (replacements) {
+                for (const k in replacements) text = text.replace('{' + k + '}', replacements[k]);
+            }
+            return text;
+        }
+
+        async function loadReviews() {
+            const container = document.getElementById('reviewsDynamicList');
+            container.innerHTML = '<div class="reviews-loading"><i class="fas fa-circle-notch fa-spin"></i> ' + reviewMsg('reviewLoading') + '</div>';
+            try {
+                const res = await fetch(REVIEWS_SCRIPT_URL);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+
+                container.innerHTML = '';
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    container.innerHTML = '<p class="reviews-empty">' + reviewMsg('reviewEmpty') + '</p>';
+                    return;
+                }
+
+                data.slice(-3).reverse().forEach(r => {
+                    const name = escapeHtml(r.name || 'Анонім');
+                    const message = escapeHtml(r.message || '');
+                    const date = r.date ? formatDate(r.date) : '';
+
+                    const card = document.createElement('div');
+                    card.className = 'review-user-card';
+                    card.innerHTML = `
+                        <div class="review-user-meta">
+                            <i class="fas fa-user-circle"></i>
+                            <strong>${name}</strong>
+                            <span class="review-user-date">${date}</span>
+                        </div>
+                        <p>${message}</p>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (err) {
+                console.error('Помилка завантаження відгуків:', err);
+                container.innerHTML = '<p class="reviews-empty">' + reviewMsg('reviewLoadError') + '</p>';
+            }
+        }
+
+        // Відправка відгуку
+        async function submitReview() {
+            const nameEl = document.getElementById('reviewName');
+            const msgEl = document.getElementById('reviewMessage');
+            const honeypot = document.getElementById('reviewHoneypot');
+            const btn = document.getElementById('reviewSubmitBtn');
+
+            const name = nameEl.value.trim();
+            const message = msgEl.value.trim();
+
+            document.getElementById('reviewFormStatus').style.display = 'none';
+
+            // Honeypot — якщо заповнено, це бот
+            if (honeypot.value) return;
+
+            // Валідація
+            if (!name || name.length < 2) {
+                showReviewStatus(reviewMsg('reviewErrorName'), 'error');
+                nameEl.focus();
+                return;
+            }
+            if (!message || message.length < 10) {
+                showReviewStatus(reviewMsg('reviewErrorMsg'), 'error');
+                msgEl.focus();
+                return;
+            }
+
+            // Захист від спаму: не частіше 1 разу на 10 хвилин
+            const lastSent = parseInt(localStorage.getItem('reviewLastSent') || '0');
+            const now = Date.now();
+            if (now - lastSent < 10 * 60 * 1000) {
+                const minLeft = Math.ceil((10 * 60 * 1000 - (now - lastSent)) / 60000);
+                showReviewStatus(reviewMsg('reviewErrorSpam', { n: minLeft }), 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            const originalText = btn.textContent;
+            btn.textContent = reviewMsg('reviewSending');
+
+            try {
+                // mode: 'no-cors' — відповідь opaque, тому res.ok не перевіряємо.
+                // Apps Script читає тіло через e.postData.contents незалежно від Content-Type.
+                const params = new URLSearchParams({ action: 'submit', name, message });
+                await fetch(REVIEWS_SCRIPT_URL + '?' + params.toString(), {
+                    method: 'GET',
+                    mode: 'no-cors'
+                });
+
+                localStorage.setItem('reviewLastSent', String(Date.now()));
+                nameEl.value = '';
+                msgEl.value = '';
+                showReviewStatus(reviewMsg('reviewSuccess'), 'success');
+            } catch (err) {
+                console.error('Помилка надсилання відгуку:', err);
+                showReviewStatus(reviewMsg('reviewErrorSend') + ' (' + err.message + ')', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        }
+
+        function showReviewStatus(text, type) {
+            const el = document.getElementById('reviewFormStatus');
+            el.textContent = text;
+            el.className = 'review-form-status ' + type;
+            el.style.display = 'block';
+            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (type === 'success') {
+                setTimeout(() => { el.style.display = 'none'; }, 7000);
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+                      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+        }
+
+        function formatDate(dateStr) {
+            try {
+                const d = new Date(dateStr);
+                return d.toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+            } catch { return dateStr; }
+        }
+
         // ======= МОВНИЙ ПЕРЕМИКАЧ =======
         
         const translations = {
@@ -1908,19 +2060,22 @@
                 socialSubtitle: "Ми у соцмережах",
                 reviewsTitle: "Відгуки",
                 reviewVideoLink: "Відгуки",
-                review1Author: "Жінка, 37 років",
-                review1Text: "Після сеансу сканування та чистки я знову можу дихати на повні груди, є чітке розуміння причин стану, зменшилась тривожність, прийшло відчуття внутрішньої стабільності. Зміни відбувалися поступово, але були стійкими.",
-                review2Author: "Чоловік, 42 роки",
-                review2Text: "Запит стосувався складних стосунків у сім'ї та постійного відчуття «глухого кута». В ході роботи виявилось енергетичне втручання. Результат: змінилось сприйняття деяких ситуацій, з'явилась можливість по-іншому реагувати та приймати рішення без внутрішнього тиску. Робота дала глибоке усвідомлення.",
-                review3Author: "Жінка, 29 років",
-                review3Text: "Прийшла з питанням втрати сенсу та емоційного вигорання. Після сеансу спілкування з енергоінформаційним аспектом з'ясувались причини, що дало мені можливість переглянути своє теперішнє життя, повернулась концентрація, зникло відчуття внутрішнього хаосу.",
-                review4Author: "Чоловік, 35 років",
-                review4Text: "Звертався без чіткого запиту — було відчуття, що «щось не так», але складно пояснити. Робота допомогла структурувати внутрішній стан, з'явилось відчуття опори й ясності. Особливо цінним був детальний зворотний зв'язок після сеансу.",
-                review5Author: "Жінка, 46 років",
-                review5Text: "Запит — повторювані емоційні стани та відчуття виснаження. Після прослуховування аудіо з елементами регресивної роботи відчула полегшення і внутрішню тишу, є ясність що потрібно змінити в житті. Зміни проявляються не одразу, але через кілька тижнів стало помітно, що життя \"зсунулось з мертвої точки\".",
+                reviewFormTitle: "Залишити відгук",
+                reviewNamePlaceholder: "Ваше ім'я",
+                reviewMessagePlaceholder: "Ваш відгук",
+                reviewSubmitBtn: "Надіслати",
+                reviewSending: "Надсилаємо...",
+                reviewSuccess: "✓ Дякуємо! Ваш відгук надіслано на модерацію.",
+                reviewErrorSend: "✕ Помилка відправки. Спробуйте ще раз.",
+                reviewErrorName: "⚠ Введіть ваше ім'я (мінімум 2 символи)",
+                reviewErrorMsg: "⚠ Відгук занадто короткий (мінімум 10 символів)",
+                reviewErrorSpam: "⚠ Ви вже надсилали відгук. Спробуйте через {n} хв.",
+                reviewLoading: "Завантаження відгуків...",
+                reviewEmpty: "Відгуків поки немає. Будьте першим!",
+                reviewLoadError: "Не вдалося завантажити відгуки.",
                 faqTitle: "Часті питання",
 				faqQuestion0: "Навіщо робити сканування та очищення астрального тіла?",
-				faqAnswer0: "Щоб прибрати накопичений емоційний “бруд” і чужий вплив, який може псувати самопочуття та настрій. Це допомагає відчути легкість, спокій і краще розуміти себе.",
+				faqAnswer0: "Щоб прибрати накопичений емоційний 'бруд' і чужий вплив, який може псувати самопочуття та настрій. Це допомагає відчути легкість, спокій і краще розуміти себе.",
                 faqQuestion1: "Чи безпечно це?",
                 faqAnswer1: "Так. Робота проводиться у контрольованому форматі, без впливу на психіку клієнта. Ми не використовуємо методів навіювання чи примусу.",
                 faqQuestion2: "Чи потрібно мені бути присутнім під час сесії?",
@@ -2014,16 +2169,19 @@
                 socialSubtitle: "Мы в соцсетях",
                 reviewsTitle: "Отзывы",
                 reviewVideoLink: "Отзывы",
-                review1Author: "Женщина, 37 лет",
-                review1Text: "После сеанса сканирования и чистки я снова могу дышать полной грудью, есть четкое понимание причин состояния, уменьшилась тревожность, пришло ощущение внутренней стабильности. Изменения происходили постепенно, но были устойчивыми.",
-                review2Author: "Мужчина, 42 года",
-                review2Text: "Запрос касался сложных отношений в семье и постоянного ощущения «тупика». В ходе работы выявилось энергетическое вмешательство. Результат: изменилось восприятие некоторых ситуаций, появилась возможность по-другому реагировать и принимать решения без внутреннего давления. Работа дала глубокое осознание.",
-                review3Author: "Женщина, 29 лет",
-                review3Text: "Пришла с вопросом потери смысла и эмоционального выгорания. После сеанса общения с энергоинформационным аспектом выяснились причины, что дало мне возможность пересмотреть свою настоящую жизнь, вернулась концентрация, исчезло ощущение внутреннего хаоса.",
-                review4Author: "Мужчина, 35 лет",
-                review4Text: "Обращался без четкого запроса — было ощущение, что «что-то не так», но сложно объяснить. Работа помогла структурировать внутреннее состояние, появилось ощущение опоры и ясности. Особенно ценной была подробная обратная связь после сеанса.",
-                review5Author: "Женщина, 46 лет",
-                review5Text: "Запрос — повторяющиеся эмоциональные состояния и ощущение истощения. После прослушивания аудио с элементами регрессивной работы почувствовала облегчение и внутреннюю тишину, есть ясность что нужно изменить в жизни. Изменения проявляются не сразу, но через несколько недель стало заметно, что жизнь \"сдвинулась с мертвой точки\".",
+                reviewFormTitle: "Оставить отзыв",
+                reviewNamePlaceholder: "Ваше имя",
+                reviewMessagePlaceholder: "Ваш отзыв",
+                reviewSubmitBtn: "Отправить",
+                reviewSending: "Отправляем...",
+                reviewSuccess: "✓ Спасибо! Ваш отзыв отправлен на модерацию.",
+                reviewErrorSend: "✕ Ошибка отправки. Попробуйте ещё раз.",
+                reviewErrorName: "⚠ Введите ваше имя (минимум 2 символа)",
+                reviewErrorMsg: "⚠ Отзыв слишком короткий (минимум 10 символов)",
+                reviewErrorSpam: "⚠ Вы уже отправляли отзыв. Попробуйте через {n} мин.",
+                reviewLoading: "Загрузка отзывов...",
+                reviewEmpty: "Отзывов пока нет. Будьте первым!",
+                reviewLoadError: "Не удалось загрузить отзывы.",
                 faqTitle: "Частые вопросы",
 				faqQuestion0: "Зачем делать сканирование и очищение астрального тела?",
 				faqAnswer0: "Чтобы убрать накопившийся эмоциональный «мусор» и чужое влияние, которые могут ухудшать самочувствие и настроение. Это помогает почувствовать лёгкость, спокойствие и лучше понимать себя.",
@@ -2127,15 +2285,28 @@
             
             // Оновлюємо всі тексти з перекладами
             for (const key in translations[lang]) {
+                // Placeholder-и форми відгуків — окрема обробка (немає id=key в DOM)
+                if (key === 'reviewNamePlaceholder') {
+                    const el = document.getElementById('reviewName');
+                    if (el) el.placeholder = translations[lang][key];
+                    continue;
+                }
+                if (key === 'reviewMessagePlaceholder') {
+                    const el = document.getElementById('reviewMessage');
+                    if (el) el.placeholder = translations[lang][key];
+                    continue;
+                }
+
                 const element = document.getElementById(key);
                 if (element) {
                     if (key === 'directionsList1' || key === 'directionsList2') {
-                        // Особлива обробка для списків
                         const listItems = element.getElementsByTagName('li');
                         const items = translations[lang][key];
                         for (let i = 0; i < listItems.length && i < items.length; i++) {
                             listItems[i].textContent = items[i];
                         }
+                    } else if (key === 'reviewSubmitBtn') {
+                        element.textContent = translations[lang][key];
                     } else if (key === 'consentLabel' || key === 'cookieText') {
                         // HTML контент
                         element.innerHTML = translations[lang][key];
@@ -2292,6 +2463,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Завантажуємо мову
             loadLanguage();
+            
+            // Завантажуємо відгуки
+            loadReviews();
             
             // Налаштовуємо cookie banner
             setupCookieBanner();
