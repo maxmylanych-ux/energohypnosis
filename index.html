@@ -1536,9 +1536,17 @@
                 <button class="btn" onclick="submitReview()" id="reviewSubmitBtn">Надіслати</button>
             </div>
 
-            <!-- Динамічний список останніх 3 відгуків -->
+            <!-- Лічильник та список відгуків -->
+            <div id="reviewsCountBar" style="display:none; text-align:center; margin-bottom:1.2rem;">
+                <span id="reviewsCountText" style="font-size:0.95rem; color:var(--accent); opacity:0.8;"></span>
+            </div>
             <div class="reviews-dynamic-container" id="reviewsDynamicList">
                 <div class="reviews-loading"><i class="fas fa-circle-notch fa-spin"></i> Завантаження відгуків...</div>
+            </div>
+            <div id="reviewsShowMoreWrap" style="display:none; text-align:center; margin-top:1.5rem;">
+                <button class="btn" id="reviewsShowMoreBtn" onclick="showMoreReviews()" style="background:transparent; color:var(--accent); border:2px solid var(--accent);">
+                    <span id="reviewsShowMoreText">Показати більше</span>
+                </button>
             </div>
 
             <!-- Відеовідгук внизу -->
@@ -1879,6 +1887,63 @@
             return text;
         }
 
+        // Зберігаємо всі відгуки і поточний показаний індекс
+        let _allReviews = [];
+        let _shownCount = 0;
+        const REVIEWS_PER_PAGE = 3;
+        const REVIEWS_MAX = 10;
+
+        function renderReviewCard(r) {
+            const name = escapeHtml(r.name || 'Анонім');
+            const message = escapeHtml(r.message || '');
+            const date = r.date ? formatDate(r.date) : '';
+            const card = document.createElement('div');
+            card.className = 'review-user-card';
+            card.innerHTML = `
+                <div class="review-user-meta">
+                    <i class="fas fa-user-circle"></i>
+                    <strong>${name}</strong>
+                    <span class="review-user-date">${date}</span>
+                </div>
+                <p>${message}</p>
+            `;
+            return card;
+        }
+
+        function updateShowMoreBtn() {
+            const wrap = document.getElementById('reviewsShowMoreWrap');
+            const remaining = _allReviews.length - _shownCount;
+            if (remaining > 0 && _shownCount < REVIEWS_MAX) {
+                wrap.style.display = 'block';
+                const next = Math.min(remaining, REVIEWS_PER_PAGE, REVIEWS_MAX - _shownCount);
+                document.getElementById('reviewsShowMoreText').textContent =
+                    reviewMsg('reviewShowMore', { n: next, total: remaining });
+            } else {
+                wrap.style.display = 'none';
+            }
+        }
+
+        function updateCountBar() {
+            const bar = document.getElementById('reviewsCountBar');
+            const text = document.getElementById('reviewsCountText');
+            if (_allReviews.length > 0) {
+                bar.style.display = 'block';
+                text.textContent = reviewMsg('reviewCount', { n: _allReviews.length });
+            } else {
+                bar.style.display = 'none';
+            }
+        }
+
+        function showMoreReviews() {
+            const container = document.getElementById('reviewsDynamicList');
+            const next = Math.min(REVIEWS_PER_PAGE, REVIEWS_MAX - _shownCount, _allReviews.length - _shownCount);
+            for (let i = _shownCount; i < _shownCount + next; i++) {
+                container.appendChild(renderReviewCard(_allReviews[i]));
+            }
+            _shownCount += next;
+            updateShowMoreBtn();
+        }
+
         async function loadReviews() {
             const container = document.getElementById('reviewsDynamicList');
             container.innerHTML = '<div class="reviews-loading"><i class="fas fa-circle-notch fa-spin"></i> ' + reviewMsg('reviewLoading') + '</div>';
@@ -1888,29 +1953,29 @@
                 const data = await res.json();
 
                 container.innerHTML = '';
+                _allReviews = [];
+                _shownCount = 0;
 
                 if (!Array.isArray(data) || data.length === 0) {
                     container.innerHTML = '<p class="reviews-empty">' + reviewMsg('reviewEmpty') + '</p>';
+                    document.getElementById('reviewsCountBar').style.display = 'none';
+                    document.getElementById('reviewsShowMoreWrap').style.display = 'none';
                     return;
                 }
 
-                data.slice(-3).reverse().forEach(r => {
-                    const name = escapeHtml(r.name || 'Анонім');
-                    const message = escapeHtml(r.message || '');
-                    const date = r.date ? formatDate(r.date) : '';
+                // Сортуємо від нових до старих
+                _allReviews = [...data].reverse();
 
-                    const card = document.createElement('div');
-                    card.className = 'review-user-card';
-                    card.innerHTML = `
-                        <div class="review-user-meta">
-                            <i class="fas fa-user-circle"></i>
-                            <strong>${name}</strong>
-                            <span class="review-user-date">${date}</span>
-                        </div>
-                        <p>${message}</p>
-                    `;
-                    container.appendChild(card);
-                });
+                updateCountBar();
+
+                // Показуємо перші 3
+                const first = Math.min(REVIEWS_PER_PAGE, _allReviews.length);
+                for (let i = 0; i < first; i++) {
+                    container.appendChild(renderReviewCard(_allReviews[i]));
+                }
+                _shownCount = first;
+
+                updateShowMoreBtn();
             } catch (err) {
                 console.error('Помилка завантаження відгуків:', err);
                 container.innerHTML = '<p class="reviews-empty">' + reviewMsg('reviewLoadError') + '</p>';
@@ -2073,6 +2138,8 @@
                 reviewLoading: "Завантаження відгуків...",
                 reviewEmpty: "Відгуків поки немає. Будьте першим!",
                 reviewLoadError: "Не вдалося завантажити відгуки.",
+                reviewCount: "Всього відгуків: {n}",
+                reviewShowMore: "Показати ще ({n})",
                 faqTitle: "Часті питання",
 				faqQuestion0: "Навіщо робити сканування та очищення астрального тіла?",
 				faqAnswer0: "Щоб прибрати накопичений емоційний 'бруд' і чужий вплив, який може псувати самопочуття та настрій. Це допомагає відчути легкість, спокій і краще розуміти себе.",
@@ -2182,6 +2249,8 @@
                 reviewLoading: "Загрузка отзывов...",
                 reviewEmpty: "Отзывов пока нет. Будьте первым!",
                 reviewLoadError: "Не удалось загрузить отзывы.",
+                reviewCount: "Всего отзывов: {n}",
+                reviewShowMore: "Показать ещё ({n})",
                 faqTitle: "Частые вопросы",
 				faqQuestion0: "Зачем делать сканирование и очищение астрального тела?",
 				faqAnswer0: "Чтобы убрать накопившийся эмоциональный «мусор» и чужое влияние, которые могут ухудшать самочувствие и настроение. Это помогает почувствовать лёгкость, спокойствие и лучше понимать себя.",
